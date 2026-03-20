@@ -71,3 +71,18 @@ output "db_name" {
 output "db_subnet_group_name" {
   value = module.rds.db_subnet_group_name
 }
+
+output "frontend_bucket_name" {
+  description = "Frontend S3 bucket name"
+  value       = module.s3_frontend.bucket_name
+}
+
+output "frontend_website_endpoint" {
+  description = "Frontend S3 website endpoint"
+  value       = module.s3_frontend.website_endpoint
+}
+
+output "frontend_website_domain" {
+  description = "Frontend S3 website domain"
+  value       = module.s3_frontend.website_domain
+}

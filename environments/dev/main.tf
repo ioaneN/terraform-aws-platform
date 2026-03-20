@@ -104,3 +104,13 @@ module "rds" {
   skip_final_snapshot     = var.db_skip_final_snapshot
   backup_retention_period = var.db_backup_retention_period
 }
+
+module "s3_frontend" {
+  source = "../../modules/s3_frontend"
+
+  project_name   = var.project_name
+  environment    = var.environment
+  bucket_name    = var.frontend_bucket_name
+  index_document = var.frontend_index_document
+  error_document = var.frontend_error_document
+}

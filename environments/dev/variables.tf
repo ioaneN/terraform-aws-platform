@@ -189,3 +189,20 @@ variable "db_backup_retention_period" {
   type        = number
   default     = 7
 }
+
+variable "frontend_bucket_name" {
+  description = "S3 bucket name for frontend static website"
+  type        = string
+}
+
+variable "frontend_index_document" {
+  description = "Frontend index document"
+  type        = string
+  default     = "index.html"
+}
+
+variable "frontend_error_document" {
+  description = "Frontend error document"
+  type        = string
+  default     = "error.html"
+}

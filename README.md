@@ -160,3 +160,17 @@ This means:
 - The database is intended for application access only, not public access
 - `dev` uses cost-conscious settings for now
 - Secret handling can be improved later with AWS Secrets Manager
+
+## Phase 7 - S3 Frontend
+
+Implemented a static frontend hosted on Amazon S3.
+
+### Added
+- Reusable `s3_frontend` Terraform module
+- S3 bucket for frontend assets
+- Static website hosting configuration
+- Public read bucket policy for website content
+- Environment-level outputs for website endpoint
+
+### Result
+The frontend can now be served directly from the S3 website endpoint in the dev environment.
