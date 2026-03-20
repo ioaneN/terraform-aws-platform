@@ -64,3 +64,21 @@ variable "alb_security_group_id" {
   description = "Alb security group"
   type        = string
 }
+
+variable "enable_https" {
+  description = "Enable HTTPS listener"
+  type        = bool
+  default     = false
+}
+
+variable "https_listener_port" {
+  description = "HTTPS listener port"
+  type        = number
+  default     = 443
+}
+
+variable "certificate_arn" {
+  description = "ACM certificate ARN for HTTPS listener"
+  type        = string
+  default     = null
+}

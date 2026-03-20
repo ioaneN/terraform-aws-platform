@@ -86,3 +86,15 @@ output "frontend_website_domain" {
   description = "Frontend S3 website domain"
   value       = module.s3_frontend.website_domain
 }
+
+output "backend_url" {
+  value = "https://${var.backend_domain_name}"
+}
+
+output "frontend_url" {
+  value = "http://${var.frontend_domain_name}"
+}
+
+output "acm_certificate_arn" {
+  value = module.acm.certificate_arn
+}

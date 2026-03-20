@@ -60,3 +60,7 @@ db_backup_retention_period = 7
 frontend_bucket_name    = "ioanee-terraform-aws-platform-dev-frontend"
 frontend_index_document = "index.html"
 frontend_error_document = "error.html"
+
+hosted_zone_name        = "webapp.test"
+backend_domain_name     = "api.dev.webapp.test"
+frontend_domain_name    = "dev.webapp.test"

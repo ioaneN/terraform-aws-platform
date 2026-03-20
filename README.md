@@ -174,3 +174,24 @@ Implemented a static frontend hosted on Amazon S3.
 
 ### Result
 The frontend can now be served directly from the S3 website endpoint in the dev environment.
+
+## Phase 8 - Route53 + ACM
+
+Implemented custom domain and certificate management for the platform.
+
+### Added
+- Reusable `acm` module for requesting and validating ACM certificates with DNS validation
+- Reusable `route53_records` module for DNS records
+- ACM certificate for backend domain
+- HTTPS listener on the ALB using ACM
+- HTTP to HTTPS redirect for backend traffic
+- Route53 record pointing backend domain to the ALB
+- Route53 record pointing frontend domain to the S3 website endpoint
+
+### Result
+The backend is now accessible through a custom HTTPS domain using Route53 and ACM.
+The frontend is accessible through a custom Route53 domain backed by the S3 website endpoint.
+
+### Notes
+- In the current architecture, the S3 static website endpoint is served over HTTP
+- Full HTTPS for the frontend would require CloudFront in front of S3

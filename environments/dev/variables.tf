@@ -206,3 +206,18 @@ variable "frontend_error_document" {
   type        = string
   default     = "error.html"
 }
+
+variable "hosted_zone_name" {
+  description = "Public Route53 hosted zone name"
+  type        = string
+}
+
+variable "backend_domain_name" {
+  description = "Custom domain for backend ALB"
+  type        = string
+}
+
+variable "frontend_domain_name" {
+  description = "Custom domain for S3 frontend"
+  type        = string
+}

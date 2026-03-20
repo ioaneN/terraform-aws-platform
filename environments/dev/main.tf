@@ -43,21 +43,22 @@ module "vpc" {
 module "alb" {
   source = "../../modules/alb"
 
-  project_name = var.project_name
-  environment  = var.environment
-
-  vpc_id                = module.vpc.vpc_id
-  public_subnet_ids     = module.vpc.public_subnet_ids
-  alb_security_group_id = module.security_groups.alb_sg_id
-
+  project_name            = var.project_name
+  environment             = var.environment
+  vpc_id                  = module.vpc.vpc_id
+  public_subnet_ids       = module.vpc.public_subnet_ids
+  alb_security_group_id   = module.security_groups.alb_sg_id
   alb_ingress_cidr_blocks = var.alb_ingress_cidr_blocks
   listener_port           = var.alb_listener_port
   listener_protocol       = var.alb_listener_protocol
+  target_group_port       = var.backend_target_group_port
+  target_group_protocol   = var.backend_target_group_protocol
+  health_check_path       = var.backend_health_check_path
+  health_check_matcher    = var.backend_health_check_matcher
 
-  target_group_port     = var.backend_target_group_port
-  target_group_protocol = var.backend_target_group_protocol
-  health_check_path     = var.backend_health_check_path
-  health_check_matcher  = var.backend_health_check_matcher
+  enable_https        = true
+  https_listener_port = 443
+  certificate_arn     = module.acm.certificate_arn
 }
 
 
@@ -113,4 +114,22 @@ module "s3_frontend" {
   bucket_name    = var.frontend_bucket_name
   index_document = var.frontend_index_document
   error_document = var.frontend_error_document
+}
+
+module "acm" {
+  source = "../../modules/acm"
+
+  domain_name      = var.backend_domain_name
+  hosted_zone_name = var.hosted_zone_name
+}
+
+module "route53_records" {
+  source = "../../modules/route53_records"
+
+  hosted_zone_name        = var.hosted_zone_name
+  backend_record_name     = var.backend_domain_name
+  alb_dns_name            = module.alb.alb_dns_name
+  alb_zone_id             = module.alb.alb_zone_id
+  frontend_record_name    = var.frontend_domain_name
+  frontend_website_domain = module.s3_frontend.website_domain
 }
