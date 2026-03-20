@@ -22,3 +22,11 @@ output "backend_target_group_name" {
   description = "Backend target group name"
   value       = aws_lb_target_group.backend.name
 }
+
+output "alb_arn_suffix" {
+  value = aws_lb.this.arn_suffix
+}
+
+output "backend_target_group_arn_suffix" {
+  value = aws_lb_target_group.backend.arn_suffix
+}

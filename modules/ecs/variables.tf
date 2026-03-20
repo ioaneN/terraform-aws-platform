@@ -76,3 +76,9 @@ variable "health_check_path" {
   type        = string
   default     = "/"
 }
+
+variable "enable_container_insights" {
+  description = "Enable ECS Container Insights"
+  type        = bool
+  default     = true
+}

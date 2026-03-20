@@ -10,6 +10,10 @@ resource "aws_ecs_cluster" "this" {
     Environment = var.environment
     Project     = var.project_name
   }
+  setting {
+    name  = "containerInsights"
+    value = var.enable_container_insights ? "enabled" : "disabled"
+  }
 }
 
 resource "aws_cloudwatch_log_group" "this" {
@@ -22,6 +26,7 @@ resource "aws_cloudwatch_log_group" "this" {
     Project     = var.project_name
   }
 }
+
 
 resource "aws_ecs_task_definition" "this" {
   family                   = "${local.name_prefix}-${var.container_name}"

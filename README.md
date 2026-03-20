@@ -216,3 +216,24 @@ This phase adds web application firewall protection and strengthens security con
 - WAF currently protects the backend ALB
 - The frontend uses S3 without CloudFront, so WAF is not applied to the frontend endpoint in this phase
 - This is an intentional tradeoff for the current architecture stage
+
+## Phase 10: Monitoring / Logging / Alerts
+
+This phase adds baseline observability for the dev environment.
+
+Implemented:
+- CloudWatch log group for ECS application logs
+- ECS Container Insights
+- SNS topic for alert notifications
+- CloudWatch alarms for:
+  - ALB 5XX errors
+  - Unhealthy target count
+  - ECS CPU utilization
+  - ECS memory utilization
+  - RDS CPU utilization
+  - RDS free storage space
+
+Result:
+- Application logs are centralized in CloudWatch
+- Core infrastructure and service health is monitored
+- Email-based alerting is enabled through SNS subscriptions

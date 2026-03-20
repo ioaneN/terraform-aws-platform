@@ -17,3 +17,7 @@ output "ecs_task_definition_arn" {
   description = "ECS task definition ARN"
   value       = aws_ecs_task_definition.this.arn
 }
+
+output "ecs_log_group_name" {
+  value = aws_cloudwatch_log_group.this.name
+}

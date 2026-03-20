@@ -233,3 +233,9 @@ variable "waf_rate_limit" {
   type        = number
   default     = 2000
 }
+
+variable "alarm_email_endpoints" {
+  description = "List of email addresses for monitoring alerts"
+  type        = list(string)
+  default     = []
+}

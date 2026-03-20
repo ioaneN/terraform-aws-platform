@@ -67,3 +67,5 @@ frontend_domain_name = "dev.webapp.test"
 enable_https         = false
 
 waf_rate_limit = 2000
+
+alarm_email_endpoints = ["your-email@example.com"]

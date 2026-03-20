@@ -144,3 +144,17 @@ module "waf" {
   alb_arn      = module.alb.alb_arn
   rate_limit   = var.waf_rate_limit
 }
+
+module "monitoring" {
+  source = "../../modules/monitoring"
+
+  project_name = var.project_name
+  environment  = var.environment
+
+  alarm_email_endpoints   = var.alarm_email_endpoints
+  alb_arn_suffix          = module.alb.alb_arn_suffix
+  target_group_arn_suffix = module.alb.backend_target_group_arn_suffix
+  ecs_cluster_name        = module.ecs.ecs_cluster_name
+  ecs_service_name        = module.ecs.ecs_service_name
+  rds_instance_id         = module.rds.db_instance_id
+}
