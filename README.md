@@ -195,3 +195,24 @@ The frontend is accessible through a custom Route53 domain backed by the S3 webs
 ### Notes
 - In the current architecture, the S3 static website endpoint is served over HTTP
 - Full HTTPS for the frontend would require CloudFront in front of S3
+
+
+## Phase 9: WAF + security hardening
+
+This phase adds web application firewall protection and strengthens security controls around the internet-facing application path.
+
+### Implemented
+- Reusable `waf` module
+- AWS WAFv2 regional Web ACL attached to the Application Load Balancer
+- AWS managed rule groups:
+  - `AWSManagedRulesCommonRuleSet`
+  - `AWSManagedRulesKnownBadInputsRuleSet`
+  - `AWSManagedRulesAmazonIpReputationList`
+- Rate limiting rule to block excessive requests from a single IP
+- CloudWatch visibility enabled for WAF metrics
+- Additional hardening for ALB and database resources
+
+### Notes
+- WAF currently protects the backend ALB
+- The frontend uses S3 without CloudFront, so WAF is not applied to the frontend endpoint in this phase
+- This is an intentional tradeoff for the current architecture stage

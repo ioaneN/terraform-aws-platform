@@ -56,9 +56,9 @@ module "alb" {
   health_check_path       = var.backend_health_check_path
   health_check_matcher    = var.backend_health_check_matcher
 
-  enable_https        = true
+  enable_https        = var.enable_https
   https_listener_port = 443
-  certificate_arn     = module.acm.certificate_arn
+  certificate_arn     = var.enable_https ? module.acm[0].certificate_arn : null
 }
 
 
@@ -117,10 +117,12 @@ module "s3_frontend" {
 }
 
 module "acm" {
+  count  = var.enable_https ? 1 : 0
   source = "../../modules/acm"
 
-  domain_name      = var.backend_domain_name
-  hosted_zone_name = var.hosted_zone_name
+  domain_name               = var.backend_domain_name
+  hosted_zone_name          = var.hosted_zone_name
+  subject_alternative_names = []
 }
 
 module "route53_records" {
@@ -132,4 +134,13 @@ module "route53_records" {
   alb_zone_id             = module.alb.alb_zone_id
   frontend_record_name    = var.frontend_domain_name
   frontend_website_domain = module.s3_frontend.website_domain
+}
+
+module "waf" {
+  source = "../../modules/waf"
+
+  project_name = var.project_name
+  environment  = var.environment
+  alb_arn      = module.alb.alb_arn
+  rate_limit   = var.waf_rate_limit
 }

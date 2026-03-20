@@ -96,5 +96,5 @@ output "frontend_url" {
 }
 
 output "acm_certificate_arn" {
-  value = module.acm.certificate_arn
+  value = var.enable_https ? module.acm[0].certificate_arn : null
 }

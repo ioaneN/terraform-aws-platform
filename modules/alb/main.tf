@@ -9,7 +9,7 @@ resource "aws_lb" "this" {
   security_groups    = [var.alb_security_group_id]
   subnets            = var.public_subnet_ids
 
-  enable_deletion_protection = false
+  enable_deletion_protection = true
 
   tags = {
     Name        = "${local.name_prefix}-alb"

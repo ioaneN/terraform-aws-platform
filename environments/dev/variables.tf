@@ -221,3 +221,15 @@ variable "frontend_domain_name" {
   description = "Custom domain for S3 frontend"
   type        = string
 }
+
+variable "enable_https" {
+  description = "Whether to enable HTTPS and ACM for this environment"
+  type        = bool
+  default     = false
+}
+
+variable "waf_rate_limit" {
+  description = "Requests per 5-minute period per IP before WAF blocks"
+  type        = number
+  default     = 2000
+}
