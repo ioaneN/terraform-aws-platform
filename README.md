@@ -76,6 +76,7 @@ terraform-aws-platform/
 ├── modules/
 ├── scripts/
 └── README.md
+```
 
 ## Phase 3: Security groups + IAM basics
 
@@ -105,3 +106,17 @@ This means:
 - IAM in this phase is intentionally minimal
 - more detailed permissions for Secrets Manager, S3, CloudWatch, and app-specific access will be added in later phases
 - implementation is currently applied in the `dev` environment firstcd
+
+
+## Phase 4: ALB + Target Groups
+
+This phase adds the load balancing layer for the `dev` environment.
+
+Implemented:
+- Application Load Balancer (ALB) across public subnets
+- backend target group for application traffic
+- HTTP listener on port 80
+- integration with the existing ALB security group created in the security phase
+- outputs for ALB DNS name and backend target group ARN
+
+This prepares the platform for the next phase, where the ECS Fargate service will be attached to the target group and will receive traffic through the ALB.

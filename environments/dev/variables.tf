@@ -43,3 +43,45 @@ variable "enable_nat_gateway" {
   type        = bool
   default     = true
 }
+
+variable "alb_ingress_cidr_blocks" {
+  description = "CIDR blocks allowed to access the ALB"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "alb_listener_port" {
+  description = "ALB listener port"
+  type        = number
+  default     = 80
+}
+
+variable "alb_listener_protocol" {
+  description = "ALB listener protocol"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "backend_target_group_port" {
+  description = "Backend target group port"
+  type        = number
+  default     = 80
+}
+
+variable "backend_target_group_protocol" {
+  description = "Backend target group protocol"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "backend_health_check_path" {
+  description = "Health check path for backend target group"
+  type        = string
+  default     = "/"
+}
+
+variable "backend_health_check_matcher" {
+  description = "Expected HTTP codes for backend health check"
+  type        = string
+  default     = "200"
+}

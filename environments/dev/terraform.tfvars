@@ -24,3 +24,14 @@ private_db_subnet_cidrs = [
 ]
 
 enable_nat_gateway = true
+
+
+alb_ingress_cidr_blocks = ["0.0.0.0/0"]
+
+alb_listener_port     = 80
+alb_listener_protocol = "HTTP"
+
+backend_target_group_port     = 80
+backend_target_group_protocol = "HTTP"
+backend_health_check_path     = "/"
+backend_health_check_matcher  = "200"
