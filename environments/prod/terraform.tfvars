@@ -1,4 +1,71 @@
 aws_region   = "us-east-1"
 project_name = "terraform-aws-platform"
-environment  = "stage"
-vpc_cidr     = "10.20.0.0/16"
+environment  = "prod"
+vpc_cidr     = "10.10.0.0/16"
+
+azs = [
+  "us-east-1a",
+  "us-east-1b"
+]
+
+public_subnet_cidrs = [
+  "10.10.1.0/24",
+  "10.10.2.0/24"
+]
+
+private_app_subnet_cidrs = [
+  "10.10.11.0/24",
+  "10.10.12.0/24"
+]
+
+private_db_subnet_cidrs = [
+  "10.10.21.0/24",
+  "10.10.22.0/24"
+]
+
+enable_nat_gateway = true
+
+
+alb_ingress_cidr_blocks = ["0.0.0.0/0"]
+
+alb_listener_port     = 80
+alb_listener_protocol = "HTTP"
+
+backend_target_group_port     = 80
+backend_target_group_protocol = "HTTP"
+backend_health_check_path     = "/"
+backend_health_check_matcher  = "200"
+
+container_name  = "backend"
+container_image = "public.ecr.aws/docker/library/nginx:latest"
+container_port  = 80
+
+desired_count   = 1
+ecs_task_cpu    = 256
+ecs_task_memory = 512
+
+db_engine_version          = "16.11"
+db_instance_class          = "db.t3.micro"
+db_allocated_storage       = 20
+db_max_allocated_storage   = 100
+db_name                    = "appdb"
+db_username                = "postgresadmin"
+db_password                = "ChangeThisDevPassword123!"
+db_port                    = 5432
+db_multi_az                = false
+db_deletion_protection     = false
+db_skip_final_snapshot     = true
+db_backup_retention_period = 7
+
+frontend_bucket_name    = "ioanee-terraform-aws-platform-dev-frontend"
+frontend_index_document = "index.html"
+frontend_error_document = "error.html"
+
+hosted_zone_name     = "webapp.test"
+backend_domain_name  = "api.dev.webapp.test"
+frontend_domain_name = "dev.webapp.test"
+enable_https         = false
+
+waf_rate_limit = 2000
+
+alarm_email_endpoints = ["your-email@example.com"]
