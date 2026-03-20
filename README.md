@@ -76,3 +76,32 @@ terraform-aws-platform/
 ├── modules/
 ├── scripts/
 └── README.md
+
+## Phase 3: Security groups + IAM basics
+
+This phase introduces the base security layer for the platform.
+
+### Implemented
+- Reusable `security_groups` module
+- Reusable `iam_basic` module
+- ALB security group allowing inbound HTTP/HTTPS from the internet
+- ECS service security group allowing inbound application traffic only from the ALB
+- RDS security group allowing PostgreSQL access only from the ECS service
+- ECS task execution role
+- ECS task role
+- Attachment of the AWS managed `AmazonECSTaskExecutionRolePolicy`
+
+### Security model
+Traffic is restricted through security groups using this flow:
+
+`Internet -> ALB -> ECS -> RDS`
+
+This means:
+- the load balancer is the only public entry point
+- the application is reachable only from the ALB
+- the database is reachable only from the application layer
+
+### Notes
+- IAM in this phase is intentionally minimal
+- more detailed permissions for Secrets Manager, S3, CloudWatch, and app-specific access will be added in later phases
+- implementation is currently applied in the `dev` environment firstcd
