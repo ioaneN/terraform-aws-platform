@@ -6,14 +6,6 @@ This project demonstrates a production-style AWS infrastructure platform built w
 
 Build a portfolio-grade AWS platform that reflects real-world infrastructure design and Terraform best practices across `dev`, `stage`, and `prod`.
 
-## Current Progress
-
-### Completed
-- Phase 1: Foundation / repo structure / remote state
-- Phase 2: VPC + networking
-
-### In Progress
-- Phase 3: Security groups + IAM basics
 
 ### Planned
 - ALB + target groups
@@ -45,14 +37,14 @@ Build a portfolio-grade AWS platform that reflects real-world infrastructure des
 
 ## Implemented So Far
 
-### Phase 1 — Foundation
+## Phase 1 — Foundation
 - Repository structure initialized
 - Environment folders created
 - Terraform backend configured with S3
 - State locking configured with DynamoDB
 - Provider/version files prepared
 
-### Phase 2 — VPC + Networking
+## Phase 2 — VPC + Networking
 Implemented for the `dev` environment:
 - Custom VPC
 - 2 public subnets across 2 Availability Zones
@@ -138,3 +130,33 @@ Implemented the ECS Fargate backend for the dev environment.
 
 ### Result
 The backend application now runs on ECS Fargate in private subnets and is exposed through the Application Load Balancer.
+
+## Phase 6: RDS PostgreSQL
+
+This phase adds the database layer for the platform.
+
+### Implemented
+- Created a reusable `rds` Terraform module
+- Provisioned a PostgreSQL RDS instance in the `dev` environment
+- Created a DB subnet group using private database subnets
+- Attached the RDS instance to the database security group
+- Restricted the database to private networking only
+- Added outputs for database endpoint, port, name, and subnet group
+
+### Architecture
+The database is deployed in private DB subnets and is not publicly accessible.
+
+Traffic flow:
+
+`Internet -> ALB -> ECS -> RDS`
+
+This means:
+- users access the application through the ALB
+- the ECS backend communicates with PostgreSQL privately
+- the database is protected by subnet isolation and security groups
+
+### Notes
+- Phase 6 uses a PostgreSQL RDS instance for the backend database layer
+- The database is intended for application access only, not public access
+- `dev` uses cost-conscious settings for now
+- Secret handling can be improved later with AWS Secrets Manager

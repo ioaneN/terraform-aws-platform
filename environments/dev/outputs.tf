@@ -50,3 +50,24 @@ output "alb_dns_name" {
 output "backend_target_group_arn" {
   value = module.alb.backend_target_group_arn
 }
+
+
+output "db_instance_id" {
+  value = module.rds.db_instance_id
+}
+
+output "db_endpoint" {
+  value = module.rds.db_endpoint
+}
+
+output "db_port" {
+  value = module.rds.db_port
+}
+
+output "db_name" {
+  value = module.rds.db_name
+}
+
+output "db_subnet_group_name" {
+  value = module.rds.db_subnet_group_name
+}

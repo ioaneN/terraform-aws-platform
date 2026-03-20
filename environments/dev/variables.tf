@@ -118,3 +118,74 @@ variable "ecs_task_memory" {
   type        = number
   default     = 512
 }
+
+
+variable "db_engine_version" {
+  description = "PostgreSQL engine version"
+  type        = string
+  default     = "16.3"
+}
+
+variable "db_instance_class" {
+  description = "RDS instance class"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "db_allocated_storage" {
+  description = "Initial DB storage in GB"
+  type        = number
+  default     = 20
+}
+
+variable "db_max_allocated_storage" {
+  description = "Maximum DB storage in GB"
+  type        = number
+  default     = 100
+}
+
+variable "db_name" {
+  description = "Initial database name"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Database master username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Database master password"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_port" {
+  description = "Database port"
+  type        = number
+  default     = 5432
+}
+
+variable "db_multi_az" {
+  description = "Enable Multi-AZ for DB"
+  type        = bool
+  default     = false
+}
+
+variable "db_deletion_protection" {
+  description = "Enable deletion protection for DB"
+  type        = bool
+  default     = false
+}
+
+variable "db_skip_final_snapshot" {
+  description = "Skip final snapshot when destroying DB"
+  type        = bool
+  default     = true
+}
+
+variable "db_backup_retention_period" {
+  description = "Backup retention period in days"
+  type        = number
+  default     = 7
+}
