@@ -62,5 +62,5 @@ variable "health_check_matcher" {
 
 variable "alb_security_group_id" {
   description = "Alb security group"
-  type = string
+  type        = string
 }

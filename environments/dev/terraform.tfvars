@@ -35,3 +35,11 @@ backend_target_group_port     = 80
 backend_target_group_protocol = "HTTP"
 backend_health_check_path     = "/"
 backend_health_check_matcher  = "200"
+
+container_name  = "backend"
+container_image = "public.ecr.aws/docker/library/nginx:latest"
+container_port  = 80
+
+desired_count   = 1
+ecs_task_cpu    = 256
+ecs_task_memory = 512

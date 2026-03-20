@@ -85,3 +85,36 @@ variable "backend_health_check_matcher" {
   type        = string
   default     = "200"
 }
+
+variable "container_name" {
+  description = "Backend container name"
+  type        = string
+}
+
+variable "container_image" {
+  description = "Backend container image"
+  type        = string
+}
+
+variable "container_port" {
+  description = "Backend container port"
+  type        = number
+}
+
+variable "desired_count" {
+  description = "Desired ECS task count"
+  type        = number
+  default     = 1
+}
+
+variable "ecs_task_cpu" {
+  description = "ECS task CPU units"
+  type        = number
+  default     = 256
+}
+
+variable "ecs_task_memory" {
+  description = "ECS task memory in MiB"
+  type        = number
+  default     = 512
+}

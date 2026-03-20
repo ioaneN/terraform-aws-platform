@@ -120,3 +120,21 @@ Implemented:
 - outputs for ALB DNS name and backend target group ARN
 
 This prepares the platform for the next phase, where the ECS Fargate service will be attached to the target group and will receive traffic through the ALB.
+
+
+## Phase 5 - ECS Fargate Backend
+
+Implemented the ECS Fargate backend for the dev environment.
+
+### Added
+- ECS cluster
+- ECS task definition
+- ECS service
+- CloudWatch log group
+- Fargate tasks deployed in private app subnets
+- Integration between ECS service and existing ALB target group
+- Reuse of IAM roles from the IAM module
+- Reuse of ECS service security group from the security module
+
+### Result
+The backend application now runs on ECS Fargate in private subnets and is exposed through the Application Load Balancer.
